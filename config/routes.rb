@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   get 'welcome/faq'
 
-  root 'welcome#contact'
+  root 'welcome#faq'
 
 
 end
