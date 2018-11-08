@@ -29,6 +29,7 @@ h1 {
   background-color: #1234;
 }
 
-//.google:hover .rotateX{
-//  transform: perspective(500px) scaleZ(2) rotateX(45deg);
-//}
+.google-btn:hover {
+  transform: perspective(500px) scaleZ(2) rotateX(45deg);
+
+}
