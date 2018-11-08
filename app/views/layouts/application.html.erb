@@ -7,8 +7,23 @@
     <meta name="viewport" content="width-device-width, inital-scale=1">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+<style>
+  div {
+    width: 100px;
+    height: 100px;
+    background-color: white;
+    animation-name: header;
+     animation-duration: 3s;
+   }
+    @keyframes header {
+        0%   {background-color: red;}
+        18%  {background-color:orange}
+        36%  {background-color:yellow}
+        54%  {background-color: green;}
+        72%  {background-color: blue;}
+        90%  {background-color:purple}
+</style>
   </head>
-
   <body>
 
     <div class="container">
