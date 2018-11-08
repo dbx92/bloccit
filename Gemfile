@@ -17,6 +17,8 @@ source 'https://rubygems.org'
  # #2
  group :development do
    # Use sqlite3 as the development database for Active Record
+   gem 'pry-rails'
+   
    gem 'sqlite3'
  end
 
