@@ -15,27 +15,17 @@ require "random_data"
   )
 end
 
-5.times do
-  Post.find_or_create_by!(
-    title: RandomData.random_sentence,
-    body: RandomData.random_paragraph
-  )
-end
 posts = Post.all
 
 100.times do
-  Comment.create(
+  Comment.create!(
     post: posts.sample,
     body: RandomData.random_paragraph
   )
 end
 
-10.times do
-  Comment.find_or_create_by(
-    post: posts.sample,
-    body: RandomData.random_paragraph
-  )
-end
+p = Post.find_or_create_by!(title: "Unique",body:"Unique")
+Comment.find_or_create_by!(post:p,body: "Unique")
 
 puts "Seed finished"
 puts "#{Post.count} posts created"
