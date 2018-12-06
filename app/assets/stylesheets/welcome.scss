@@ -28,17 +28,3 @@ h1 {
   height:auto;
   background-color: #1234;
 }
-
-.social-btn:hover {
-  display: block;
-  position: absolute;
-  width: auto;
-  height: 100px;
-  border: none;
-  line-height: 100px;
-  font-family: sans-serif;
-  font-size: 60px;
-  color: black;
-  text-align: auto;
-  transform: perspective(500px) scaleZ(2) rotateX(45deg) ;
-}
