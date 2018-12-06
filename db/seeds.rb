@@ -24,8 +24,12 @@ posts = Post.all
   )
 end
 
-p = Post.find_or_create_by!(title: "Unique",body:"Unique")
-Comment.find_or_create_by!(post:p,body: "Unique")
+unique = Post.find_or_create_by!(title: "Unique",body:"Unique")
+Comment.find_or_create_by!(post:unique,body: "Unique")
+
+
+
+
 
 puts "Seed finished"
 puts "#{Post.count} posts created"
