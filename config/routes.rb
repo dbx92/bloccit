@@ -8,5 +8,7 @@ Rails.application.routes.draw do
 
   get 'faq' => 'welcome#faq'
 
+  get 'posts' => 'posts#index'
+
   root 'welcome#index'
 end
