@@ -10,19 +10,18 @@ module RandomData
   end
 
   def self.random_sentence
-   strings = []
-   rand(3..8).times do
-     strings << random_word
-   end
+    strings = []
+    rand(3..8).times do
+      strings << random_word
+    end
 
-   sentence = strings.join(" ")
-   sentence.capitalize << "."
- end
+    sentence = strings.join(" ")
+    sentence.capitalize << "."
+  end
 
-# #8
- def self.random_word
-   letters = ('a'..'z').to_a
-   letters.shuffle!
-   letters[0,rand(3..8)].join
- end
+  def self.random_word
+    letters = ('a'..'z').to_a #%w 
+    letters.shuffle!
+    letters[0,rand(3..8)].join
+  end
 end
