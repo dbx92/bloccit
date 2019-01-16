@@ -8,10 +8,28 @@
 
 require "random_data"
 
-50.times do
+5.times do
+  Topic.create!(
+    name: RandomData.random_sentence,
+    description: RandomData.random_paragraph
+  )
+end
+topics = Topic.all
+
+5.times do
   Post.create!(
+    topic: topics.sample,
     title: RandomData.random_sentence,
     body: RandomData.random_paragraph
+  )
+end
+
+10.times do
+  SponsoredPost.create!(
+    topic: topics.sample,
+    title: RandomData.random_sentence,
+    body: RandomData.random_paragraph,
+    price: rand(1..99)
   )
 end
 
@@ -33,14 +51,14 @@ end
 
 posts = Post.all
 
-100.times do
+10.times do
   Comment.create!(
     post: posts.sample,
     body: RandomData.random_paragraph
   )
 end
 
-unique = Post.find_or_create_by!(title: "Unique",body:"Unique")
+unique = Post.create_with(topic: topics.sample).find_or_create_by!(title: "Unique", body:"Unique")
 Comment.find_or_create_by!(post:unique,body: "Unique")
 
 
@@ -48,7 +66,9 @@ Comment.find_or_create_by!(post:unique,body: "Unique")
 
 
 puts "Seed finished"
+puts "#{SponsoredPost.count} sponsored posts"
 puts "#{Post.count} posts created"
 puts "#{Comment.count} comments created"
 puts "#{Advertisement.count} advertisements created"
 puts "#{Question.count} questions created"
+puts "#{Topic.count} topics created"

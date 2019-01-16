@@ -21,10 +21,11 @@ source 'https://rubygems.org'
 
    gem 'sqlite3'
  end
- 
+
  group :development, :test do
    gem "rspec-rails", "~> 3.0"
    gem "rails-controller-testing"
+   gem 'shoulda'
  end
 
  # Use Puma as the app server
@@ -46,7 +47,6 @@ source 'https://rubygems.org'
  gem 'mini_racer'
 
 gem 'rails_12factor'
-
 
  group :development do
    gem 'listen', '~> 3.0.5'

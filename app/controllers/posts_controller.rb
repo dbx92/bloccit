@@ -1,18 +1,17 @@
 require "random_data"
 class PostsController < ApplicationController
-  def index
-    @posts = Post.all
-    @posts.each_with_index {|post, index| post.title = 'SPAM' if index % 5 === 0}
-  end
 
   def create
     @post = Post.new
     @post.title = params[:post][:title]
     @post.body = params[:post][:body]
+    @topic = Topic.find(params[:topic_id])
+
+    @post.topic = @topic
 
     if @post.save
       flash[:notice] = "Post was saved."
-      redirect_to @post
+      redirect_to [@topic, @post]
     else
       flash.now[:alert] = "There was an error saving. Please try again."
       render :new
@@ -24,6 +23,7 @@ class PostsController < ApplicationController
   end
 
   def new
+    @topic = Topic.find(params[:topic_id])
     @post = Post.new
   end
 
@@ -38,7 +38,7 @@ class PostsController < ApplicationController
 
     if @post.save
       flash[:notice] = "Post was updated"
-      redirect_to @post
+      redirect_to [@post.topic, @post]
     else
       flash.now[:alert] = "There was an error saving, please try again"
       render :edit
@@ -50,7 +50,7 @@ class PostsController < ApplicationController
 
     if @post.destroy
       flash[:notice] = "\"#{@post.title}\" was deleted successfully."
-      redirect_to posts_path
+      redirect_to @post.topic
     else
       flash.now[:alert] = "There was an error deleting the post"
       render :show
