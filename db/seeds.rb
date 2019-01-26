@@ -58,7 +58,7 @@ posts = Post.all
   )
 end
 
-unique = Post.create_with(topic: topics.sample).find_or_create_by!(title: "Unique", body:"Unique")
+unique = Post.create_with(topic: topics.sample).find_or_create_by!(title: "Unique", body:"Unique Body 12345678910")
 Comment.find_or_create_by!(post:unique,body: "Unique")
 
 

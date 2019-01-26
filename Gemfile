@@ -52,3 +52,5 @@ gem 'rails_12factor'
    gem 'listen', '~> 3.0.5'
  end
 gem 'bootstrap-sass'
+
+gem 'bcrypt'
