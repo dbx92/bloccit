@@ -10,7 +10,7 @@ validates :password, length: { minimum: 6 }, allow_blank: true
 
 validates :email,
           presence: true,
-          uniqueness: { case_sensitive: false },
+          uniqueness: { case_sensitive: true },
           length: { minimum: 3, maximum: 254 }
 
 
