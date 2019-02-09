@@ -22,6 +22,7 @@ RSpec.describe User, type: :model do
        expect(user).to have_attributes(name: "Bloccit User", email: "user@bloccit.com")
      end
    end
+   
    describe "capitalize user" do
      it "should capitalize first and last name" do
        expect(capitalize_user[:name]).to eq(user[:name])
