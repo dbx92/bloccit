@@ -3,6 +3,8 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   let(:user) { User.create!(name: "Bloccit User", email: "user@bloccit.com", password: "password") }
   let(:capitalize_user) {User.create!(name:"bloccit user", email:"capitalize_user@bloccit.com", password:"password")}
+
+   it { is_expected.to have_many(:posts) }
    it { is_expected.to validate_presence_of(:name) }
    it { is_expected.to validate_length_of(:name).is_at_least(1) }
 
@@ -22,11 +24,11 @@ RSpec.describe User, type: :model do
        expect(user).to have_attributes(name: "Bloccit User", email: "user@bloccit.com")
      end
    end
-   
+
    describe "capitalize user" do
      it "should capitalize first and last name" do
-       expect(capitalize_user[:name]).to eq(user[:name])
-     end
+       expect(capitalize_user[:name]).to eq("Bloccit User") #won't recognize user[:name] to be
+     end                                                    #Bloccit User, but it does capitalize name
    end
 
    describe "invalid user" do

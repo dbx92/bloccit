@@ -1,0 +1,17 @@
+Discuss database migrations.
+
+Discuss the has_many association.
+
+Discuss the belongs_to association.
+
+Discuss scoping within your application.
+
+Implement new scoping types.
+
+
+
+---- ASSIGNMENT ----
+add the following scopes to the Post class:
+
+An ordered_by_title scope; and
+An ordered_by_reverse_created_at scope
