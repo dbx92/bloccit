@@ -1,17 +1,108 @@
-Discuss database migrations.
+~~Discuss database migrations.
 
-Discuss the has_many association.
+  $ rails generate migration AddPartNumberToProducts part_number:string:index
 
-Discuss the belongs_to association.
+  >>
+class AddPartNumberToProducts < ActiveRecord::Migration[5.0]
+  def change
+    add_column :products, :part_number, :string
+    add_index :products, :part_number
+  end
+end
+  >>
 
-Discuss scoping within your application.
+~~Discuss the has_many association.
 
-Implement new scoping types.
+~~Discuss the belongs_to association.
+
+  >>
+
+    has_many and belongs_to are used to make connections
+    between two active record models
+    Because they make common operations simpler and easier in your code. For example, consider a simple Rails application that includes a model for authors and a model for books. Each author can have many books. Without associations, the model declarations would look like this:
+
+class Author < ApplicationRecord
+end
+
+class Book < ApplicationRecord
+end
+Now, suppose we wanted to add a new book for an existing author. We'd need to do something like this:
+
+@book = Book.create(published_at: Time.now, author_id: @author.id)
+Or consider deleting an author, and ensuring that all of its books get deleted as well:
+
+@books = Book.where(author_id: @author.id)
+@books.each do |book|
+  book.destroy
+end
+@author.destroy
+With Active Record associations, we can streamline these - and other - operations by declaratively telling Rails that there is a connection between the two models. Here's the revised code for setting up authors and books:
+
+class Author < ApplicationRecord
+  has_many :books, dependent: :destroy
+end
+
+class Book < ApplicationRecord
+  belongs_to :author
+end
+With this change, creating a new book for a particular author is easier:
+
+@book = @author.books.create(published_at: Time.now)
+Deleting an author and all of its books is much easier:
+
+@author.destroy
+
+ >>
+
+~~Discuss scoping within your application.
+
+  scopes are used to grab the right objects out
+  of a database in a quick and easy method
+  --ie--
+
+  scope :created_since, ->(time) { where("reviews.created_at > ?", time) if time.present? }
+
+~~Implement new scoping types.
 
 
 
----- ASSIGNMENT ----
-add the following scopes to the Post class:
+-------------------------------------------
 
-An ordered_by_title scope; and
-An ordered_by_reverse_created_at scope
+~~Explain what a view helper is in Rails and how they are used.
+
+
+
+~~Explain how to use an enum.
+
+  enum is used to add an attribute to a model
+  ```
+  enum role: [:member, :admin, :moderator]
+  ```
+  added into the user model allows the ability
+  to shift between users and sesssion restrictions
+
+      ~~~~~~~~ .SEND METHOD ~~~~~~~~
+  ~~~~~~~~~METHOD CALLS AS MESSAGES~~~~~~~~~~~~~
+```
+    case input
+      when :up_arrow then ship.tilt_up
+      when :down_arrow then ship.tilt_down
+      when :left_arrow then ship.tilt_left
+      when :right_arrow then ship.tilt_right
+    end
+```
+    can be replaced by setting a hash with directions and '
+    then using the send method to take the handlers specified input
+
+```
+    handlers = {
+      up_arrow: :tilt_up,
+      down_arrow: :tilt_down,
+      left_arrow: :tilt_left,
+      right_arrow: :tilt_right
+    }
+
+    ship.send(handlers[input])
+```
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

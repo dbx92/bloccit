@@ -1,4 +1,8 @@
 class SponsoredPostsController < ApplicationController
+
+  before_action :require_sign_in, except: :show
+  before_action :authorize_user, except: [:show, :new, :create]
+
   def show
     @sponsored_post = SponsoredPost.find(params[:id])
   end
@@ -53,6 +57,21 @@ class SponsoredPostsController < ApplicationController
     else
       flash.now[:alert] = "There was an error saving. Please try again."
       render :new
+    end
+  end
+
+  private
+
+  def post_params
+    params.require(:sponsored_post).permit(:title, :body)
+  end
+
+  def authorize_user
+    sponsored_post = SponsoredPost.find(params[:id])
+
+    unless current_user == post.user || current_user.admin? || current_user.moderator?
+      flash[:alert] = "You must be an admin to do that."
+      redirect_to [sponsored_post.topic, sponsored_post]
     end
   end
 end

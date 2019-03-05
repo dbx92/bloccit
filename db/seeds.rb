@@ -72,10 +72,24 @@ end
 unique = Post.create_with(topic: topics.sample).find_or_create_by!(title: "Unique", body:"Unique Body 12345678910", user: users.sample)
 Comment.find_or_create_by!(post:unique,body: "Unique")
 
-user = User.first
-user.update_attributes!(
-  email: 'davidpiobergamo@comcast.net',
+admin = User.create!(
+  name: 'Admin User',
+  email: 'admin@example.com',
+  password: 'helloworld',
+  role: 'admin'
+)
+
+member = User.create!(
+  name: 'Member User',
+  email: 'member@example.com',
   password: 'helloworld'
+)
+
+moderator = User.create!(
+  name: 'Moderator',
+  email: 'moderator@example.com',
+  password: 'helloworld',
+  role: 'moderator'
 )
 
 
@@ -88,3 +102,6 @@ puts "#{Comment.count} comments created"
 puts "#{Advertisement.count} advertisements created"
 puts "#{Question.count} questions created"
 puts "#{Topic.count} topics created"
+puts admin.name
+puts member.name
+puts moderator.name
