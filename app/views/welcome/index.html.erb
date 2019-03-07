@@ -1,12 +1,13 @@
 <div class="jumbotron">
   <h1>Bloccit</h1>
   <p>Bloccit is a resource for sharing links with your friends!</p>
+  <% unless current_user %>
   <p>
     <%= link_to "Sign In", new_session_path, class:'btn btn-primary'%>
     <%= link_to "Sign Up", new_user_path, class: 'btn btn-primary'%>
   </p>
+  <% end %>
 </div>
-
 <div class="row">
    <div class="col-md-4">
      <h2>Solves world hunger</h2>

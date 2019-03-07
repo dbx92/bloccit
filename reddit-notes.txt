@@ -106,3 +106,15 @@ Deleting an author and all of its books is much easier:
 ```
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~Shallow nesting
+
+  resources :events do
+    resources :comments, expect: => [:update, :destroy, :show, :new, :edit]
+    resources :comments, only: => [:create]
+  end
+  
+~~~Explain the has_many association in Rails.
+
+~~~Explain the belongs_to association in Rails.
+
+~~~Explain HTTP POST requests

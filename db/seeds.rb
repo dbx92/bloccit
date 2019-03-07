@@ -64,13 +64,14 @@ posts = Post.all
 
 10.times do
   Comment.create!(
+    user: users.sample,
     post: posts.sample,
     body: RandomData.random_paragraph
   )
 end
 
 unique = Post.create_with(topic: topics.sample).find_or_create_by!(title: "Unique", body:"Unique Body 12345678910", user: users.sample)
-Comment.find_or_create_by!(post:unique,body: "Unique")
+Comment.find_or_create_by!(post:unique,body: "Unique", user: unique.user)
 
 admin = User.create!(
   name: 'Admin User',
@@ -102,6 +103,6 @@ puts "#{Comment.count} comments created"
 puts "#{Advertisement.count} advertisements created"
 puts "#{Question.count} questions created"
 puts "#{Topic.count} topics created"
-puts admin.name
-puts member.name
-puts moderator.name
+puts "#{admin.name} created"
+puts "#{member.name} created"
+puts "#{moderator.name} created"

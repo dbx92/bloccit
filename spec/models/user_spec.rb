@@ -5,6 +5,7 @@ RSpec.describe User, type: :model do
   let(:capitalize_user) {User.create!(name:"bloccit user", email:"capitalize_user@bloccit.com", password:"password")}
 
    it { is_expected.to have_many(:posts) }
+   it { is_expected.to have_many(:comments)}
    it { is_expected.to validate_presence_of(:name) }
    it { is_expected.to validate_length_of(:name).is_at_least(1) }
 
@@ -93,7 +94,7 @@ RSpec.describe User, type: :model do
        end
      end
    end
-   
+
    describe "capitalize user" do
      it "should capitalize first and last name" do
        expect(capitalize_user[:name]).to eq("Bloccit User") #won't recognize user[:name] to be
