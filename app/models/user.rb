@@ -2,6 +2,8 @@ class User < ApplicationRecord
 
 has_many :posts, dependent: :destroy
 has_many :comments, dependent: :destroy
+has_many :votes, dependent: :destroy
+
   before_save { self.email = email.downcase if email.present? }
   before_save { self.name = name.split(' ').map {|x| x.capitalize}.join(' ') if name.present?}
   before_save { self.role ||= :member }

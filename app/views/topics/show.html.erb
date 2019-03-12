@@ -9,12 +9,13 @@
     <p class="lead"><%= @topic.description %></p>
     <% @topic.posts.each do |post| %>
      <%= render post %>
+     <%= render partial: 'votes/voting', locals: { post:post } %>
     <% end %>
     <% @topic.sponsored_posts.each do |sponsored_post| %>
       <%= render sponsored_post %>
     <% end %>
   </div>
-  <% if user_is_authorized_for_topics? || current_user.moderator? %>
+  <% if user_is_authorized_for_topics? || user_is_a_moderator? %>
   <div class="col-md-4">
      <%= link_to "Edit Topic", edit_topic_path, class: 'btn btn-success' %>
      <% if user_is_authorized_for_topics? %>
