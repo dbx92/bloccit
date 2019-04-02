@@ -11,11 +11,13 @@ let(:body) {RandomData.random_paragraph}
 let(:user) { User.create!(name: "Bloccit User", email: "user@bloccit.com", password: "password") }
 let(:topic) { Topic.create!(name: name, description: description)}
 let(:post) { topic.posts.create!(title: title, body: body, user: user)}
+#let(:vote) { Vote.create!(value: 1, post:post, user: user) }
 
   it { is_expected.to belong_to(:topic) }
   it { is_expected.to belong_to(:user) }
   it { is_expected.to have_many(:comments)}
   it { is_expected.to have_many(:votes)}
+  it { is_expected.to have_many(:favorites)}
   it { is_expected.to validate_presence_of(:title)}
   it { is_expected.to validate_presence_of(:body)}
   it { is_expected.to validate_presence_of(:topic)}
@@ -74,6 +76,24 @@ let(:post) { topic.posts.create!(title: title, body: body, user: user)}
         post.votes.create!(value: -1, user: user)
         expect(post.rank).to eq(old_rank - 1)
       end
+    end
+
+
+
+  end
+  describe "create_vote" do
+    it "sets the post up_vote to 1" do
+      expect(post.up_votes).to eq(1)
+    end
+
+    it "calls create_vote when a post is created" do
+      post = topic.posts.new(title: RandomData.random_sentence, body: RandomData.random_sentence, user: user)
+      expect(post).to receive(:create_vote)
+      post.save!
+    end
+
+    it "associates the vote with the owner of the post" do
+      expect(post.votes.first.user).to eq(post.user)
     end
   end
 end

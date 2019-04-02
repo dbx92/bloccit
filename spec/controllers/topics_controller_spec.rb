@@ -35,7 +35,7 @@ RSpec.describe TopicsController, type: :controller do
       end
     end
 
-     describe "GET new" do
+    describe "GET new" do
       it "returns http redirect" do
         get :new
         expect(response).to redirect_to(new_session_path)
@@ -275,6 +275,11 @@ RSpec.describe TopicsController, type: :controller do
 
   context "moderator" do
 
+    before do
+      user = User.create!(name: "Bloccit User", email: "user@bloccit.com", password: "helloworld", role: :moderator)
+      create_session(user)
+    end
+
     describe "GET index" do
       it "returns http success" do
         get :index
@@ -314,7 +319,7 @@ RSpec.describe TopicsController, type: :controller do
     describe "POST create" do
       it "returns http redirect" do
         post :create, params: { topic: { name: RandomData.random_sentence, description: RandomData.random_paragraph}}
-        expect(response).to redirect_to(new_session_path)
+        expect(response).to redirect_to(topics_path)
       end
     end
 

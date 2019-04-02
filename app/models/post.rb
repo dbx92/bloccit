@@ -4,6 +4,7 @@ class Post < ApplicationRecord
   belongs_to :user
   has_many :comments, dependent: :destroy
   has_many :votes, dependent: :destroy
+  has_many :favorites, dependent: :destroy
   after_create :create_vote
 
   default_scope { order('rank DESC') }
@@ -41,6 +42,7 @@ class Post < ApplicationRecord
   private
 
   def create_vote
-    user.votes.create!(value: 1, post:self, user: user)
+    user.votes.create(value: 1, post:self, user: user)
   end
+
 end
