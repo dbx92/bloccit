@@ -54,3 +54,5 @@ gem 'rails_12factor'
 gem 'bootstrap-sass'
 
 gem 'bcrypt'
+
+gem 'figaro', '1.0'
