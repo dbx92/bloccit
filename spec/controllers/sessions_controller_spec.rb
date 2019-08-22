@@ -40,9 +40,9 @@ RSpec.describe SessionsController, type: :controller do
         expect(response).to render_template :new
       end
 
-      it "redirects to the root view" do
+      it "redirects to the topics view" do
         post :create, params: { session: {email:my_user.email, password:my_user.password }}
-        expect(response).to redirect_to(root_path)
+        expect(response).to redirect_to(topics_path)
       end
     end
 

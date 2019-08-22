@@ -5,14 +5,13 @@ class Post < ApplicationRecord
   has_many :comments, dependent: :destroy
 
   default_scope { order('created_at DESC') }
-  scope :ordered_by_title, -> { order('title DESC')}
-  scope :ordered_by_reverse_created_at, -> { order('created_at ASC')}
+  scope :ordered_by_title, -> { order('title DESC') }
+  scope :ordered_by_reverse_created_at, -> { order('created_at ASC') }
 
-  # def self.ordered_by_title
-    # order('title DESC')
+  # def self.created_before(time)
+  #   where("created_at < ?", time)
   # end
   
-
   validates :title, length: {minimum: 5}, presence: true
   validates :body, length: {minimum: 20}, presence: true
   validates :topic, presence: true
